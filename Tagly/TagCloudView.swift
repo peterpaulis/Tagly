@@ -69,13 +69,14 @@ public struct TagCloudView<T, Content>: View where T: Identifiable, Content: Vie
         content(element)
             .alignmentGuide(.leading) { d in
                 let isFirst = element.id == self.data.first?.id
+                let isLast = element.id == self.data.last?.id
                 if isFirst {
                     self.frame.y = 0
                 }
 
                 let availableWidth = geometry.size.width
                 let exceedsAvailableWidth = (self.frame.x + d.width) > availableWidth
-
+                
                 if isFirst {
                     if self.frame.height == 0 {
                         self.frame.height = d.height
@@ -84,6 +85,11 @@ public struct TagCloudView<T, Content>: View where T: Identifiable, Content: Vie
                     self.frame.y += d.height + self.spacing
                     let newHeight = self.frame.y + d.height
                     if newHeight > self.frame.height {
+                        self.frame.height = newHeight
+                    }
+                } else if isLast {
+                    let newHeight = self.frame.y + d.height
+                    if newHeight < self.frame.height {
                         self.frame.height = newHeight
                     }
                 }
@@ -142,4 +148,3 @@ struct TagCloudView_Previews: PreviewProvider {
         .padding(10)
     }
 }
-
