@@ -14,6 +14,7 @@ Pod::Spec.new do |spec|
 
   spec.ios.deployment_target = "13.0"
   spec.swift_version = "5.0"
+  spec.osx.deployment_target = "13.0"
 
   spec.source       = { :git => "https://github.com/astarkian/Tagly.git", :tag => "#{spec.version}" }
   spec.source_files  = "Tagly/**/*.{h,m,swift}"
